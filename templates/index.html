@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Vacancy Search</title>
+    <style>
+        body {
+            font-family: Palatino Linotype, sans-serif;
+            margin: 0;
+            padding: 0;
+            
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Добавленный стиль для формы поиска */
+        form {
+            width: 20%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        
+            
+            background-color: #34495e; /* Цвет фона - синий */
+            color: white; /* Цвет текста */
+        }
+        
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            max-width: 400px; /* Устанавливаем максимальную ширину элемента */
+            padding: 5px;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        
+
+        button {
+            padding: 10px 25px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            margin-left: 70px;
+        }
+        
+        button:hover {
+            background-color: #333;
+        }
+        
+        button:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+        
+        hr {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+            border: 2px solid #34495e; /* Цвет рамки - темно-синий */
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+            border: 2px solid #34495e; /* Цвет рамки - темно-синий */
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        li {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Job Vacancy Search</h1>
+    <form method="post">
+        <label for="position">Job Title:</label>
+        <input type="text" id="position" name="position"><br><br>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city"><br><br>
+
+        <label for="skills">Skills (separated by commas):</label>
+        <input type="text" id="skills" name="skills"><br><br>
+
+        <label for="company">Company:</label>
+        <input type="text" id="company" name="company"><br><br>
+
+        <button type="submit">Search</button>
+    </form>
+
+    <hr>
+
+    {% if results %}
+        <h2>Search Results</h2>
+        <h2>{{ search_query_display }}</h2>
+        <h2>Total Vacancies: {{ total_vacancies }}</h2>
+
+        <ul>
+            {% for result in results %}
+                <li>
+                    <strong>Title:</strong> {{ result[0] }}<br>
+                    <strong>Company:</strong> {{ result[1] }}<br>
+                    <strong>Location:</strong> {{ result[2] }}<br>
+                    <strong>Requirements:</strong> {{ result[3] }}<br>
+                    <strong>Salary:</strong> {{ result[4] }}<br>
+                    <strong>Link:</strong> <a href="{{ result[5] }}" target="_blank">{{ result[5] }}</a><br>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+</body>
+</html>
